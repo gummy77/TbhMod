@@ -1,2 +1,2 @@
-# TbhMod
-*yippee*
+# Tbh Mod
+*yippee *

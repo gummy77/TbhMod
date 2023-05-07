@@ -13,4 +13,6 @@ public class TbhMod implements ModInitializer {
         SoundRegistry.registerSounds();
     }
     //TODO website - modrinth/curseforge + gumgeon
+    //TODO create Icon
+    //TODO take screenshots
 }
