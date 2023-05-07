@@ -1,0 +1,43 @@
+package gum.tbhmod.main.init;
+
+import gum.tbhmod.main.TbhMod;
+import gum.tbhmod.main.entity.TbhEntity;
+import gum.tbhmod.main.entity.entitySettings;
+import net.fabricmc.fabric.api.biome.v1.BiomeModification;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+
+public class EntityRegistry {
+
+    public static final EntityType TBH_ENTITY = registerEntity(TbhEntity.settings);
+
+
+    public static void registerEntityAttributes() {
+        FabricDefaultAttributeRegistry.register(TBH_ENTITY, TbhEntity.createTbhAttributes());
+    }
+
+    private static EntityType registerEntity (entitySettings settings){
+        EntityType entityType = Registry.register(
+                Registry.ENTITY_TYPE,
+                new Identifier(TbhMod.MODID, settings.path),
+                FabricEntityTypeBuilder.create(settings.spawnGroup, settings.entityFactory)
+                        .dimensions(EntityDimensions.fixed(settings.x, settings.y))
+                        .build()
+        );
+        if(settings.spawnsNaturally) {
+            BiomeModifications.addSpawn(
+                    (biomeSelectionContext -> biomeSelectionContext.hasTag(settings.selectorTag)),
+                    settings.spawnGroup,
+                    entityType,
+                    settings.spawnWeight,
+                    settings.minGroupSize,
+                    settings.maxGroupSize);
+        }
+        return entityType;
+    }
+}

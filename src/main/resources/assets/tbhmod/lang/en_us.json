@@ -1,0 +1,15 @@
+{
+  "itemGroup.tbhmod.tbhmodgroup": "Tbh Mod",
+
+  "item.tbhmod.cola": "Cola",
+  "item.tbhmod.tbh_meat": "Tbh Meat",
+  "item.tbhmod.tbh_creature_spawn_egg": "Tbh Creature Spawn Egg",
+
+  "subtitles.tbhmod.yippee": "Yippee",
+  "subtitles.tbhmod.tbh_hurt": "Tbh hurts",
+  "subtitles.tbhmod.tbh_dies": "Tbh dies",
+
+  "effect.tbhmod.autism": "Autism",
+
+  "entity.tbhmod.tbh": "Tbh Creature"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "SWS",
+    "SSS"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:potion"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "P": {
+      "item": "minecraft:poppy"
+    }
+  },
+  "result": {
+    "item": "tbhmod:cola",
+    "count": 1
+  }
+}

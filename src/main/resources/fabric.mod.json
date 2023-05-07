@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "tbhmod",
+  "version": "${version}",
+  "name": "TbhMod",
+  "description": "",
+  "authors": ["gummy"],
+  "contact": {
+    "repo": "https://github.com/gummy/TbhMod"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/TbhMod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "gum.tbhmod.client.TbhModClient"
+    ],
+    "main": [
+      "gum.tbhmod.main.TbhMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

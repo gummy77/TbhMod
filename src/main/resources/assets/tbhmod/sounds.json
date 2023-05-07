@@ -1,0 +1,20 @@
+{
+  "yippee": {
+    "subtitle": "subtitles.tbhmod.yippee",
+    "sounds": [
+      "tbhmod:yippee"
+    ]
+  },
+  "tbh_dies": {
+    "subtitle": "subtitles.tbhmod.tbh_dies",
+    "sounds": [
+      "tbhmod:tbh_scream"
+    ]
+  },
+  "tbh_hurt": {
+    "subtitle": "subtitles.tbhmod.tbh_hurt",
+    "sounds": [
+      "tbhmod:tbh_hurt"
+    ]
+  }
+}
