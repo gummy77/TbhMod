@@ -1,20 +1,12 @@
 package gum.tbhmod.main.entity.goals;
 
 import java.util.EnumSet;
-import java.util.function.Predicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.control.JumpControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.predicate.block.BlockStatePredicate;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 public class JumpiesGoal extends Goal {
-    private static final int MAX_TIMER = 20;
     private final MobEntity mob;
     private final World world;
     private int timer;
@@ -41,10 +33,6 @@ public class JumpiesGoal extends Goal {
 
     public boolean shouldContinue() {
         return this.timer > 0;
-    }
-
-    public int getTimer() {
-        return this.timer;
     }
 
     public void tick() {

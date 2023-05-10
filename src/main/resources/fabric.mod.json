@@ -9,7 +9,7 @@
     "repo": "https://github.com/gummy/TbhMod"
   },
   "license": "GNU GPLv3",
-  "icon": "assets/TbhMod/icon.png",
+  "icon": "assets/tbhmod/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [

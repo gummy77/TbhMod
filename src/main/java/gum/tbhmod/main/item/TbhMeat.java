@@ -3,7 +3,6 @@ package gum.tbhmod.main.item;
 import gum.tbhmod.main.init.EffectRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 
 public class TbhMeat extends ModItem{

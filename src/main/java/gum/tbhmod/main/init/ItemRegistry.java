@@ -1,21 +1,13 @@
 package gum.tbhmod.main.init;
 
 import gum.tbhmod.main.TbhMod;
-import gum.tbhmod.main.entity.TbhEntity;
-import gum.tbhmod.main.entity.entitySettings;
 import gum.tbhmod.main.item.Cola;
 import gum.tbhmod.main.item.TbhCreatureEgg;
 import gum.tbhmod.main.item.TbhMeat;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

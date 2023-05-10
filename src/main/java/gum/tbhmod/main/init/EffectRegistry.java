@@ -11,14 +11,14 @@ public class EffectRegistry {
     public static final StatusEffect AUTISM;
 
     static {
-        AUTISM = register(Registry.STATUS_EFFECT, "autism", new AutismEffect());
+        AUTISM = register("autism", new AutismEffect());
     }
 
-    public static void registerEffects() {
+    public static void registerEffects(){
 
     }
 
-    private static StatusEffect register(Registry<StatusEffect> registryType, String path, StatusEffect statusEffect) {
-        return Registry.register(registryType, new Identifier(TbhMod.MODID, path), statusEffect);
+    private static StatusEffect register(String path, StatusEffect statusEffect) {
+        return Registry.register(Registry.STATUS_EFFECT, new Identifier(TbhMod.MODID, path), statusEffect);
     }
 }

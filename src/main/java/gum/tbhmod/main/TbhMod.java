@@ -10,11 +10,8 @@ public class TbhMod implements ModInitializer {
     public void onInitialize() {
         EntityRegistry.registerEntityAttributes();
         ItemRegistry.registerItems();
+        EffectRegistry.registerEffects();
         SoundRegistry.registerSounds();
         AdvancementRegistry.registerAdvancements();
     }
-    //TODO website - modrinth/curseforge + gumgeon
-    //TODO create Icon
-    //TODO take screenshots
-    //TODO fix mob effect autism
 }

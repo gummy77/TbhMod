@@ -12,12 +12,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -30,6 +28,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class TbhEntity extends TameableEntity {
     public static entitySettings settings = new entitySettings(
@@ -45,6 +45,7 @@ public class TbhEntity extends TameableEntity {
         super(entityType, world);
         this.experiencePoints = 5;
     }
+
 
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
@@ -69,7 +70,7 @@ public class TbhEntity extends TameableEntity {
                 if (!this.isTamed()) {
                     if (this.random.nextInt(2) == 0) {
                         this.setOwner(player);
-                        AdvancementRegistry.TAMED_TBH.trigger(getServer().getPlayerManager().getPlayer(player.getUuid()));
+                            AdvancementRegistry.TAMED_TBH.trigger(Objects.requireNonNull(getServer()).getPlayerManager().getPlayer(player.getUuid()));
                         this.world.sendEntityStatus(this, (byte)7);
                     }else{
                         this.world.sendEntityStatus(this, (byte)6);

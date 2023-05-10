@@ -1,6 +1,5 @@
 package gum.tbhmod.client.model;
 
-import com.sun.jna.platform.win32.WinBase;
 import gum.tbhmod.main.entity.TbhEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -10,7 +9,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
 public class TbhEntityModel extends EntityModel<TbhEntity> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final ModelPart root;
 	private final ModelPart head, body;
 

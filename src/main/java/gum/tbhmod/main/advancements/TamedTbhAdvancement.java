@@ -23,9 +23,7 @@ public class TamedTbhAdvancement extends AbstractCriterion<TamedTbhAdvancement.C
     }
 
     public void trigger(ServerPlayerEntity player) {
-        trigger(player, condition -> {
-            return true;
-        });
+        trigger(player, condition -> true);
     }
 
     public static class Condition extends AbstractCriterionConditions {

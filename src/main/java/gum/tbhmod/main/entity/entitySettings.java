@@ -1,17 +1,8 @@
 package gum.tbhmod.main.entity;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.minecraft.data.server.BiomeTagProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.tag.BiomeTags;
 import net.minecraft.tag.TagKey;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
-
-import java.util.Collections;
-import java.util.List;
 
 public class entitySettings {
 
