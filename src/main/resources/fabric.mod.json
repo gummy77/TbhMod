@@ -1,12 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "tbhmod",
-  "version": "1.0.0a",
+  "version": "1.1.0b",
   "name": "TbhMod",
   "description": "Adds a Tamable TBH creature to minecraft",
   "authors": ["gummy"],
   "contact": {
-    "repo": "https://github.com/gummy/TbhMod"
+    "homepage": "https://gumgeon.xyz/minecraft/tbh",
+    "sources": "https://github.com/gummydummy77/TbhMod",
+    "issues": "https://github.com/gummydummy77/TbhMod/issues"
   },
   "license": "GNU GPLv3",
   "icon": "assets/tbhmod/icon.png",
