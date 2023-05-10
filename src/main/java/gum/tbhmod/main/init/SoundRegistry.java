@@ -10,21 +10,21 @@ public class SoundRegistry {
             TBH_AMBIENT, TBH_HURT, TBH_DIES;
 
     static {
-        YIPPEE = register(Registry.SOUND_EVENT, "yippee");
-        COLA = register(Registry.SOUND_EVENT, "cola");
-        FORTNITE = register(Registry.SOUND_EVENT, "fortnite");
+        YIPPEE = register("yippee");
+        COLA = register("cola");
+        FORTNITE = register("fortnite");
 
-        TBH_AMBIENT = register(Registry.SOUND_EVENT, "tbh_ambient");
-        TBH_HURT = register(Registry.SOUND_EVENT, "tbh_hurt");
-        TBH_DIES = register(Registry.SOUND_EVENT, "tbh_dies");
+        TBH_AMBIENT = register( "tbh_ambient");
+        TBH_HURT = register("tbh_hurt");
+        TBH_DIES = register("tbh_dies");
     }
 
     public static void registerSounds() {}
 
-    public static SoundEvent register (Registry<SoundEvent> Registrytype, String path) {
+    public static SoundEvent register (String path) {
         Identifier _id = new Identifier(TbhMod.MODID, path);
         SoundEvent _soundEvent = new SoundEvent(_id);
 
-        return Registry.register(Registrytype, _id, _soundEvent);
+        return Registry.register(Registry.SOUND_EVENT, _id, _soundEvent);
     }
 }

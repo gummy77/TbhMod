@@ -16,9 +16,9 @@ public class ItemRegistry {
     public static final Item COLA, TBH_CREATURE_SPAWN_EGG, TBH_MEAT;
 
     static {
-        COLA = register(Registry.ITEM, "cola", new Cola());
-        TBH_CREATURE_SPAWN_EGG = register(Registry.ITEM, "tbh_creature_spawn_egg", new TbhCreatureEgg(EntityRegistry.TBH_ENTITY));
-        TBH_MEAT = register(Registry.ITEM, "tbh_meat", new TbhMeat());
+        COLA = register("cola", new Cola());
+        TBH_CREATURE_SPAWN_EGG = register("tbh_creature_spawn_egg", new TbhCreatureEgg(EntityRegistry.TBH_ENTITY));
+        TBH_MEAT = register("tbh_meat", new TbhMeat());
     }
 
     public static void registerItems() {}
@@ -35,7 +35,7 @@ public class ItemRegistry {
             })
             .build();
 
-    public static Item register (Registry<Item> Registrytype, String path, Item item) {
-        return Registry.register(Registrytype, new Identifier(TbhMod.MODID, path), item);
+    public static Item register (String path, Item item) {
+        return Registry.register(Registry.ITEM, new Identifier(TbhMod.MODID, path), item);
     }
 }
