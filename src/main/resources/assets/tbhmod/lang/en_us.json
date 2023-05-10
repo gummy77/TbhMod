@@ -6,10 +6,21 @@
   "item.tbhmod.tbh_creature_spawn_egg": "Tbh Creature Spawn Egg",
 
   "subtitles.tbhmod.yippee": "Yippee",
+  "subtitles.tbhmod.cola": "Cola",
+  "subtitles.tbhmod.tbh_ambient": "Tbh stims",
   "subtitles.tbhmod.tbh_hurt": "Tbh hurts",
   "subtitles.tbhmod.tbh_dies": "Tbh dies",
 
   "effect.tbhmod.autism": "Autism",
 
-  "entity.tbhmod.tbh": "Tbh Creature"
+  "entity.tbhmod.tbh_creature": "Tbh Creature",
+
+  "advancements.tbhmod.root.title": "Tbh",
+  "advancements.tbhmod.root.description": "all things silly",
+
+  "advancements.tbhmod.tamed_tbh.title": "Tame the Untamable",
+  "advancements.tbhmod.tamed_tbh.description": "you stared each other down.. and then both looked away..",
+
+  "advancements.tbhmod.spyglass_at_tbh.title": "Is it a Dog?",
+  "advancements.tbhmod.spyglass_at_tbh.description": "observe it's unrivaled beauty"
 }

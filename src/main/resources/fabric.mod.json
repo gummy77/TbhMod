@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "tbhmod",
-  "version": "${version}",
+  "version": "1.0.0a",
   "name": "TbhMod",
-  "description": "",
+  "description": "Adds a Tamable TBH creature to minecraft",
   "authors": ["gummy"],
   "contact": {
     "repo": "https://github.com/gummy/TbhMod"
   },
-  "license": "All-Rights-Reserved",
+  "license": "GNU GPLv3",
   "icon": "assets/TbhMod/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -20,8 +20,8 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.14.19",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "1.19.2"
   }
 }

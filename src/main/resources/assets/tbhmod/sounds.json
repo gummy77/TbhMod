@@ -5,6 +5,21 @@
       "tbhmod:yippee"
     ]
   },
+  "cola": {
+    "subtitle": "subtitles.tbhmod.cola",
+    "sounds": [
+      "tbhmod:cola"
+    ]
+  },
+
+  "tbh_ambient": {
+    "subtitle": "subtitles.tbhmod.tbh_ambient",
+    "sounds": [
+      "tbhmod:yippee",
+      "tbhmod:cola",
+      "tbhmod:fortnite"
+    ]
+  },
   "tbh_dies": {
     "subtitle": "subtitles.tbhmod.tbh_dies",
     "sounds": [

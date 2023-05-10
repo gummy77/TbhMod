@@ -1,6 +1,7 @@
 package gum.tbhmod.main.entity;
 
 import gum.tbhmod.main.entity.goals.JumpiesGoal;
+import gum.tbhmod.main.init.AdvancementRegistry;
 import gum.tbhmod.main.init.ItemRegistry;
 import gum.tbhmod.main.init.SoundRegistry;
 import net.minecraft.entity.*;
@@ -12,9 +13,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -24,18 +29,19 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
 
-public class TbhEntity extends PathAwareEntity {
+public class TbhEntity extends TameableEntity {
     public static entitySettings settings = new entitySettings(
             "tbh_creature",
             TbhEntity::new,
             SpawnGroup.CREATURE,
             BiomeTags.IS_FOREST,
             0.8f, 0.8f,
-            5, 1, 5
+            5, 2, 6
     );
 
-    protected TbhEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    protected TbhEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
     }
@@ -43,34 +49,50 @@ public class TbhEntity extends PathAwareEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(2, new TemptGoal(this, 1.1, Ingredient.ofItems(ItemRegistry.COLA), false));
+        this.goalSelector.add(2, new SitGoal(this));
+        this.goalSelector.add(3, new TemptGoal(this, 1.1, Ingredient.ofItems(ItemRegistry.COLA), false));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(5, new LookAtEntityGoal(this, TbhEntity.class, 6.0F));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(6, new LookAroundGoal(this));
-        this.goalSelector.add(7, new JumpiesGoal(this));
+        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.3, 2.0F, 2.0F, false));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.add(9, new JumpiesGoal(this));
     }
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        if (this.isBreedingItem(itemStack)) {
-            if(this.onGround) {
-                this.jump();
-            }
-            if (!this.world.isClient) {
-                this.eat(player, itemStack);
-                world.playSound(null, this.getBlockPos(), SoundRegistry.YIPPEE, SoundCategory.NEUTRAL, 1f,  0.9f+(random.nextFloat()*0.2f));
-                world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f+(random.nextFloat()*0.1f));
+        if (this.world.isClient) {
+            boolean bl = this.isOwner(player) || this.isTamed();
+            return bl ? ActionResult.CONSUME : ActionResult.PASS;
+        }else{
+            ItemStack itemStack = player.getStackInHand(hand);
+            if (this.eat(player, itemStack)) {
+                if (!this.isTamed()) {
+                    if (this.random.nextInt(2) == 0) {
+                        this.setOwner(player);
+                        AdvancementRegistry.TAMED_TBH.trigger(getServer().getPlayerManager().getPlayer(player.getUuid()));
+                        this.world.sendEntityStatus(this, (byte)7);
+                    }else{
+                        this.world.sendEntityStatus(this, (byte)6);
+                    }
+                }
+
                 return ActionResult.SUCCESS;
             }else{
-                return ActionResult.CONSUME;
+                ActionResult actionResult = super.interactMob(player, hand);
+                if (!actionResult.isAccepted() && this.isOwner(player)) {
+                    this.setSitting(!this.isSitting());
+                    this.jumping = false;
+                    this.navigation.stop();
+                    return ActionResult.SUCCESS;
+                }
             }
+            return super.interactMob(player, hand);
         }
-        return super.interactMob(player, hand);
+
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.YIPPEE;
+        return SoundRegistry.TBH_AMBIENT;
     }
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundRegistry.TBH_HURT;
@@ -79,17 +101,24 @@ public class TbhEntity extends PathAwareEntity {
         return SoundRegistry.TBH_DIES;
     }
 
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(ItemRegistry.COLA);
-    }
+    protected boolean eat(PlayerEntity player, ItemStack stack) {
+        if(stack.isOf(ItemRegistry.COLA) && this.onGround){
+            if (!player.getAbilities().creativeMode) {
+                stack.decrement(1);
+            }
+            this.jump();
+            this.heal(4);
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 20, 5), player);
 
-    protected void eat(PlayerEntity player, ItemStack stack) {
-        if (!player.getAbilities().creativeMode) {
-            stack.decrement(1);
+            if (this.random.nextInt(3) == 0) {
+                world.playSound(null, this.getBlockPos(), SoundRegistry.COLA, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
+            }else{
+                world.playSound(null, this.getBlockPos(), SoundRegistry.YIPPEE, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
+            }
+            world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f+(random.nextFloat()*0.1f));
+            return true;
         }
-        if(stack.isOf(ItemRegistry.COLA)){
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20*20, 5), player);
-        }
+        return false;
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -109,5 +138,16 @@ public class TbhEntity extends PathAwareEntity {
 
     public EntityGroup getGroup() {
         return EntityGroup.DEFAULT;
+    }
+
+    @Override
+    public boolean cannotBeSilenced() {
+        return super.cannotBeSilenced();
+    }
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
     }
 }

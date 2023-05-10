@@ -1,0 +1,47 @@
+{
+  "parent": "tbhmod:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:spyglass"
+    },
+    "title": {
+      "translate": "advancements.tbhmod.spyglass_at_tbh.title"
+    },
+    "description": {
+      "translate": "advancements.tbhmod.spyglass_at_tbh.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "spyglass_at_tbh": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:spyglass"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "tbhmod:tbh_creature"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "requirements": [
+    [
+      "spyglass_at_tbh"
+    ]
+  ]
+}

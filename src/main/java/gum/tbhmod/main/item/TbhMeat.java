@@ -8,6 +8,17 @@ import net.minecraft.item.FoodComponent;
 
 public class TbhMeat extends ModItem{
     public TbhMeat() {
-        super(new FabricItemSettings().food(new FoodComponent.Builder().hunger(3).saturationModifier(1.2f).meat().statusEffect(new StatusEffectInstance(EffectRegistry.AUTISM, 999999999, 0), 100).build()));
+        super(new FabricItemSettings().food(new FoodComponent.Builder()
+                .hunger(3)
+                .saturationModifier(1.2f)
+                .meat()
+                .statusEffect(new StatusEffectInstance(
+                        EffectRegistry.AUTISM,
+                        999999999, 1,
+                        false, false, true
+                        ),
+                        100
+                )
+                .build()));
     }
 }
