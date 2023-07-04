@@ -31,5 +31,30 @@
     "sounds": [
       "tbhmod:tbh_hurt"
     ]
+  },
+  "yahoo": {
+    "subtitle": "subtitles.tbhmod.yahoo",
+    "sounds": [
+      "tbhmod:yahoo"
+    ]
+  },
+  "btw_ambient": {
+    "subtitle": "subtitles.tbhmod.btw_ambient",
+    "sounds": [
+      "tbhmod:yahoo",
+      "tbhmod:yahoo_2"
+    ]
+  },
+  "btw_dies": {
+    "subtitle": "subtitles.tbhmod.btw_dies",
+    "sounds": [
+      "tbhmod:tbh_scream"
+    ]
+  },
+  "btw_hurt": {
+    "subtitle": "subtitles.tbhmod.btw_hurt",
+    "sounds": [
+      "tbhmod:tbh_hurt"
+    ]
   }
 }

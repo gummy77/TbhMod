@@ -4,14 +4,19 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G3I4YRC)
 
 # Yippee
-adds a tamable tbh creature to minecraft
+adds a tameable tbh creature to minecraft
 
 <img src="https://raw.githubusercontent.com/gummydummy77/TbhMod/master/docs/swarm_banner.png">
 
 ## Features
-- Adds the Tbh Creature
-- Adds Cola
+### v2.0.0
+- Added the Btw Creature
+- Added 
+### v1.0.0
+- Added the Tbh Creature
+- Added Cola
 
+<br>
 thats all.
 
 ## Support

@@ -8,10 +8,11 @@ import net.minecraft.util.registry.Registry;
 
 public class EffectRegistry {
 
-    public static final StatusEffect AUTISM;
+    public static final StatusEffect AUTISM, ADHD;
 
     static {
         AUTISM = register("autism", new AutismEffect());
+        ADHD = register("adhd", new AdhdEffect());
     }
 
     public static void registerEffects(){

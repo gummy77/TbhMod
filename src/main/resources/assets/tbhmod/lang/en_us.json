@@ -5,15 +5,24 @@
   "item.tbhmod.tbh_meat": "Tbh Meat",
   "item.tbhmod.tbh_creature_spawn_egg": "Tbh Creature Spawn Egg",
 
+  "item.tbhmod.btw_meat": "Btw Meat",
+  "item.tbhmod.btw_creature_spawn_egg": "Btw Creature Spawn Egg",
+
   "subtitles.tbhmod.yippee": "Yippee",
   "subtitles.tbhmod.cola": "Cola",
   "subtitles.tbhmod.tbh_ambient": "Tbh stims",
   "subtitles.tbhmod.tbh_hurt": "Tbh hurts",
   "subtitles.tbhmod.tbh_dies": "Tbh dies",
 
+  "subtitles.tbhmod.yahoo": "Yahoo",
+  "subtitles.tbhmod.btw_ambient": "Btw speaks",
+  "subtitles.tbhmod.btw_hurt": "Btw hurts",
+  "subtitles.tbhmod.btw_dies": "Btw dies",
+
   "effect.tbhmod.autism": "Autism",
 
   "entity.tbhmod.tbh_creature": "Tbh Creature",
+  "entity.tbhmod.btw_creature": "Btw Creature",
 
   "advancements.tbhmod.root.title": "Tbh",
   "advancements.tbhmod.root.description": "all things silly",

@@ -15,9 +15,11 @@ import net.minecraft.util.Identifier;
 public class TbhModClient implements ClientModInitializer {
 
     public static final EntityModelLayer TBH_MODEL_LAYER = registerModel("tbh", EntityRegistry.TBH_ENTITY, TbhEntityRenderer::new);
+    public static final EntityModelLayer BTW_MODEL_LAYER = registerModel("btw", EntityRegistry.BTW_ENTITY, BtwEntityRenderer::new);
     @Override
     public void onInitializeClient() {
         EntityModelLayerRegistry.registerModelLayer(TBH_MODEL_LAYER, TbhEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(BTW_MODEL_LAYER, BtwEntityModel::getTexturedModelData);
     }
     private static EntityModelLayer registerModel(String path, EntityType entityType, EntityRendererFactory rendererFactory) {
         EntityModelLayer modelLayer = new EntityModelLayer(new Identifier(TbhMod.MODID, path), "main");

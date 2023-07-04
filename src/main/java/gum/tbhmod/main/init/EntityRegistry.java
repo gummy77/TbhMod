@@ -1,6 +1,7 @@
 package gum.tbhmod.main.init;
 
 import gum.tbhmod.main.TbhMod;
+import gum.tbhmod.main.entity.BtwEntity;
 import gum.tbhmod.main.entity.TbhEntity;
 import gum.tbhmod.main.entity.entitySettings;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -15,9 +16,11 @@ import net.minecraft.util.registry.Registry;
 public class EntityRegistry {
 
     public static final EntityType TBH_ENTITY = registerEntity(TbhEntity.settings);
+    public static final EntityType BTW_ENTITY = registerEntity(BtwEntity.settings);
     
     public static void registerEntityAttributes() {
         FabricDefaultAttributeRegistry.register(TBH_ENTITY, TbhEntity.createTbhAttributes());
+        FabricDefaultAttributeRegistry.register(BTW_ENTITY, BtwEntity.createBtwAttributes());
     }
 
     protected static EntityType<? extends Entity> registerEntity(entitySettings settings){

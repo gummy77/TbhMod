@@ -1,6 +1,7 @@
 package gum.tbhmod.main.init;
 
 import gum.tbhmod.main.TbhMod;
+import gum.tbhmod.main.item.BtwCreatureEgg;
 import gum.tbhmod.main.item.Cola;
 import gum.tbhmod.main.item.TbhCreatureEgg;
 import gum.tbhmod.main.item.TbhMeat;
@@ -13,11 +14,14 @@ import net.minecraft.util.registry.Registry;
 
 public class ItemRegistry {
 
-    public static final Item COLA, TBH_CREATURE_SPAWN_EGG, TBH_MEAT;
+    public static final Item COLA, TBH_CREATURE_SPAWN_EGG, TBH_MEAT,
+            BTW_CREATURE_SPAWN_EGG;
 
     static {
         COLA = register("cola", new Cola());
         TBH_CREATURE_SPAWN_EGG = register("tbh_creature_spawn_egg", new TbhCreatureEgg(EntityRegistry.TBH_ENTITY));
+        BTW_CREATURE_SPAWN_EGG= register("btw_creature_spawn_egg", new BtwCreatureEgg(EntityRegistry.BTW_ENTITY));
+
         TBH_MEAT = register("tbh_meat", new TbhMeat());
     }
 
@@ -31,6 +35,7 @@ public class ItemRegistry {
                 stacks.add(new ItemStack(COLA));
                 stacks.add(new ItemStack(TBH_MEAT));
                 stacks.add(new ItemStack(TBH_CREATURE_SPAWN_EGG));
+                stacks.add(new ItemStack(BTW_CREATURE_SPAWN_EGG));
 
             })
             .build();

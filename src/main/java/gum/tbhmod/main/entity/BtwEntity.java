@@ -31,17 +31,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class TbhEntity extends TameableEntity {
+public class BtwEntity extends TameableEntity {
+
+    //TODO make the creatures food
+    //TODO give funny little actions
+
     public static entitySettings settings = new entitySettings(
-            "tbh_creature",
-            TbhEntity::new,
+            "btw_creature",
+            BtwEntity::new,
             SpawnGroup.CREATURE,
             BiomeTags.IS_FOREST,
             0.8f, 0.8f,
-            3, 1, 4
+            5, 3, 8
     );
 
-    protected TbhEntity(EntityType<? extends TameableEntity> entityType, World world) {
+    protected BtwEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
         this.experiencePoints = 5;
     }
@@ -49,15 +53,15 @@ public class TbhEntity extends TameableEntity {
 
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(2, new SitGoal(this));
-        this.goalSelector.add(3, new TemptGoal(this, 1.1, Ingredient.ofItems(ItemRegistry.COLA), false));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, TbhEntity.class, 6.0F));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.3, 2.0F, 2.0F, false));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(9, new JumpiesGoal(this));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25F));
+        this.goalSelector.add(2, new WanderAroundGoal(this, 1F));
+        this.goalSelector.add(3, new SitGoal(this));
+        this.goalSelector.add(4, new TemptGoal(this, 0.9F, Ingredient.ofItems(ItemRegistry.COLA), false));
+        this.goalSelector.add(7, new FollowOwnerGoal(this, 1.25F, 5.0F, 6.0F, false));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1F));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(9, new LookAtEntityGoal(this, BtwEntity.class, 8.0F));
     }
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -93,13 +97,13 @@ public class TbhEntity extends TameableEntity {
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.TBH_AMBIENT;
+        return SoundRegistry.BTW_AMBIENT;
     }
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundRegistry.TBH_HURT;
+        return SoundRegistry.BTW_HURT;
     }
     protected SoundEvent getDeathSound() {
-        return SoundRegistry.TBH_DIES;
+        return SoundRegistry.BTW_DIES;
     }
 
     protected boolean eat(PlayerEntity player, ItemStack stack) {
@@ -107,15 +111,12 @@ public class TbhEntity extends TameableEntity {
             if (!player.getAbilities().creativeMode) {
                 stack.decrement(1);
             }
-            this.jump();
             this.heal(4);
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 20, 5), player);
 
-            if (this.random.nextInt(3) == 0) {
-                world.playSound(null, this.getBlockPos(), SoundRegistry.COLA, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
-            }else{
-                world.playSound(null, this.getBlockPos(), SoundRegistry.YIPPEE, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
-            }
+
+            world.playSound(null, this.getBlockPos(), SoundRegistry.YAHOO, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
+
             world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f+(random.nextFloat()*0.1f));
             return true;
         }
@@ -126,10 +127,10 @@ public class TbhEntity extends TameableEntity {
         return 0.7F;
     }
 
-    public static DefaultAttributeContainer.Builder createTbhAttributes() {
+    public static DefaultAttributeContainer.Builder createBtwAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5f);
     }
 
     @Override
