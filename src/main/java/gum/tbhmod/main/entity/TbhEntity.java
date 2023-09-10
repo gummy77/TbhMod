@@ -61,23 +61,28 @@ public class TbhEntity extends TameableEntity {
     }
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+
         if (this.world.isClient) {
-            boolean bl = this.isOwner(player) || this.isTamed();
+            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isOf(ItemRegistry.COLA) && !this.isTamed();
             return bl ? ActionResult.CONSUME : ActionResult.PASS;
         }else{
-            ItemStack itemStack = player.getStackInHand(hand);
             if (this.eat(player, itemStack)) {
                 if (!this.isTamed()) {
                     if (this.random.nextInt(2) == 0) {
+                        AdvancementRegistry.TAMED_TBH.trigger(Objects.requireNonNull(getServer()).getPlayerManager().getPlayer(player.getUuid()));
+
                         this.setOwner(player);
-                            AdvancementRegistry.TAMED_TBH.trigger(Objects.requireNonNull(getServer()).getPlayerManager().getPlayer(player.getUuid()));
+                        this.navigation.stop();
+                        this.setSitting(true);
+                        this.jumping = false;
                         this.world.sendEntityStatus(this, (byte)7);
                     }else{
                         this.world.sendEntityStatus(this, (byte)6);
                     }
                 }
 
-                return ActionResult.SUCCESS;
+                return ActionResult.success(this.world.isClient);
             }else{
                 ActionResult actionResult = super.interactMob(player, hand);
                 if (!actionResult.isAccepted() && this.isOwner(player)) {

@@ -13,7 +13,7 @@ public class TbhMeat extends ModItem{
                 .meat()
                 .statusEffect(new StatusEffectInstance(
                         EffectRegistry.AUTISM,
-                        999999999, 1,
+                        999999999, 0,
                         false, false, true
                         ),
                         100

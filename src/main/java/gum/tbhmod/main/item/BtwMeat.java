@@ -13,7 +13,7 @@ public class BtwMeat extends ModItem{
                 .meat()
                 .statusEffect(new StatusEffectInstance(
                         EffectRegistry.ADHD,
-                        999999999, 1,
+                        999999999, 0,
                         false, false, true
                         ),
                         100

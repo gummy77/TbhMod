@@ -2,59 +2,59 @@
   "yippee": {
     "subtitle": "subtitles.tbhmod.yippee",
     "sounds": [
-      "tbhmod:yippee"
+      "tbhmod:tbh/yippee"
     ]
   },
   "cola": {
     "subtitle": "subtitles.tbhmod.cola",
     "sounds": [
-      "tbhmod:cola"
+      "tbhmod:tbh/cola"
     ]
   },
 
   "tbh_ambient": {
     "subtitle": "subtitles.tbhmod.tbh_ambient",
     "sounds": [
-      "tbhmod:yippee",
-      "tbhmod:cola",
-      "tbhmod:fortnite"
+      "tbhmod:tbh/yippee",
+      "tbhmod:tbh/cola",
+      "tbhmod:tbh/fortnite"
     ]
   },
   "tbh_dies": {
     "subtitle": "subtitles.tbhmod.tbh_dies",
     "sounds": [
-      "tbhmod:tbh_scream"
+      "tbhmod:tbh/tbh_scream"
     ]
   },
   "tbh_hurt": {
     "subtitle": "subtitles.tbhmod.tbh_hurt",
     "sounds": [
-      "tbhmod:tbh_hurt"
+      "tbhmod:tbh/tbh_hurt"
     ]
   },
   "yahoo": {
     "subtitle": "subtitles.tbhmod.yahoo",
     "sounds": [
-      "tbhmod:yahoo"
+      "tbhmod:btw/yahoo"
     ]
   },
   "btw_ambient": {
     "subtitle": "subtitles.tbhmod.btw_ambient",
     "sounds": [
-      "tbhmod:yahoo",
-      "tbhmod:yahoo_2"
+      "tbhmod:btw/yahoo",
+      "tbhmod:btw/yahoo_2"
     ]
   },
   "btw_dies": {
     "subtitle": "subtitles.tbhmod.btw_dies",
     "sounds": [
-      "tbhmod:tbh_scream"
+      "tbhmod:tbh/tbh_scream"
     ]
   },
   "btw_hurt": {
     "subtitle": "subtitles.tbhmod.btw_hurt",
     "sounds": [
-      "tbhmod:tbh_hurt"
+      "tbhmod:tbh/tbh_hurt"
     ]
   }
 }

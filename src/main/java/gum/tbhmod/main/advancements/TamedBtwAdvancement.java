@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class TamedBtwAdvancement extends AbstractCriterion<TamedBtwAdvancement.Condition> {
-    public static final Identifier ID = new Identifier(TbhMod.MODID, "tamed_tbh");
+    public static final Identifier ID = new Identifier(TbhMod.MODID, "tamed_btw");
 
     @Override
     protected Condition conditionsFromJson(JsonObject obj, EntityPredicate.Extended playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {

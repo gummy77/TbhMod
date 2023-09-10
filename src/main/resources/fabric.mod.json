@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "tbhmod",
-  "version": "2.0.0b",
+  "version": "2.0.0",
   "name": "TbhMod",
   "description": "Adds Tamable creatures to minecraft",
   "authors": ["gummy"],

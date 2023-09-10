@@ -16,6 +16,9 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -65,16 +68,21 @@ public class BtwEntity extends TameableEntity {
     }
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+
         if (this.world.isClient) {
-            boolean bl = this.isOwner(player) || this.isTamed();
+            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isOf(ItemRegistry.COLA) && !this.isTamed();
             return bl ? ActionResult.CONSUME : ActionResult.PASS;
         }else{
-            ItemStack itemStack = player.getStackInHand(hand);
             if (this.eat(player, itemStack)) {
                 if (!this.isTamed()) {
                     if (this.random.nextInt(2) == 0) {
+                        AdvancementRegistry.TAMED_BTW.trigger(Objects.requireNonNull(getServer()).getPlayerManager().getPlayer(player.getUuid()));
+
                         this.setOwner(player);
-                            AdvancementRegistry.TAMED_TBH.trigger(Objects.requireNonNull(getServer()).getPlayerManager().getPlayer(player.getUuid()));
+                        this.navigation.stop();
+                        this.setSitting(true);
+                        this.jumping = false;
                         this.world.sendEntityStatus(this, (byte)7);
                     }else{
                         this.world.sendEntityStatus(this, (byte)6);
@@ -93,7 +101,16 @@ public class BtwEntity extends TameableEntity {
             }
             return super.interactMob(player, hand);
         }
+    }
 
+    private void spawnParticles() {
+        ParticleEffect particleEffect = ParticleTypes.HEART;
+        for(int i = 0; i < 7; ++i) {
+            double d = this.random.nextGaussian() * 0.02;
+            double e = this.random.nextGaussian() * 0.02;
+            double f = this.random.nextGaussian() * 0.02;
+            this.world.addParticle(particleEffect, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), d, e, f);
+        }
     }
 
     protected SoundEvent getAmbientSound() {

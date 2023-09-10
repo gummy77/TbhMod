@@ -1,0 +1,24 @@
+{
+  "parent": "tbhmod:root",
+  "display": {
+    "icon": {
+      "item": "tbhmod:cola"
+    },
+    "title": {
+      "translate": "advancements.tbhmod.tamed_btw.title"
+    },
+    "description": {
+      "translate": "advancements.tbhmod.tamed_btw.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "criteria": {
+    "tame_btw": {
+      "trigger": "tbhmod:tamed_btw"
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}
