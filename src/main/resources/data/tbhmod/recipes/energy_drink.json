@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SPS",
-    "SWS",
+    "SCS",
+    "SCS",
     "SSS"
   ],
   "key": {
-    "W": {
-      "item": "minecraft:glass_bottle"
+    "C": {
+      "item": "tbhmod:can"
     },
     "S": {
       "item": "minecraft:sugar"
     },
-    "P": {
-      "item": "minecraft:poppy"
+    "C": {
+      "item": "minecraft:cocoa_beans"
     }
   },
   "result": {

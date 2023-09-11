@@ -32,7 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class TbhEntity extends TameableEntity {
-    public static entitySettings settings = new entitySettings(
+    private static final Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA);
+    private static final entitySettings settings = new entitySettings(
             "tbh_creature",
             TbhEntity::new,
             SpawnGroup.CREATURE,
@@ -46,6 +47,9 @@ public class TbhEntity extends TameableEntity {
         this.experiencePoints = 5;
     }
 
+    public static entitySettings getSettings() {
+        return settings;
+    }
 
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
@@ -64,7 +68,7 @@ public class TbhEntity extends TameableEntity {
         ItemStack itemStack = player.getStackInHand(hand);
 
         if (this.world.isClient) {
-            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isOf(ItemRegistry.COLA) && !this.isTamed();
+            boolean bl = this.isOwner(player) || this.isTamed() || TAMING_INGREDIENTS.test(itemStack) && !this.isTamed();
             return bl ? ActionResult.CONSUME : ActionResult.PASS;
         }else{
             if (this.eat(player, itemStack)) {
@@ -108,7 +112,7 @@ public class TbhEntity extends TameableEntity {
     }
 
     protected boolean eat(PlayerEntity player, ItemStack stack) {
-        if(stack.isOf(ItemRegistry.COLA) && this.onGround){
+        if(TAMING_INGREDIENTS.test(stack) && this.onGround){
             if (!player.getAbilities().creativeMode) {
                 stack.decrement(1);
             }

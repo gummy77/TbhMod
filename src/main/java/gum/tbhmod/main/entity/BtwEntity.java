@@ -1,6 +1,5 @@
 package gum.tbhmod.main.entity;
 
-import gum.tbhmod.main.entity.goals.JumpiesGoal;
 import gum.tbhmod.main.init.AdvancementRegistry;
 import gum.tbhmod.main.init.ItemRegistry;
 import gum.tbhmod.main.init.SoundRegistry;
@@ -16,9 +15,6 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -35,11 +31,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class BtwEntity extends TameableEntity {
-
-    //TODO make the creatures food
-    //TODO give funny little actions
-
-    public static entitySettings settings = new entitySettings(
+    private static final Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA, ItemRegistry.ENERGY_DRINK);
+    private static final entitySettings settings = new entitySettings(
             "btw_creature",
             BtwEntity::new,
             SpawnGroup.CREATURE,
@@ -59,7 +52,7 @@ public class BtwEntity extends TameableEntity {
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25F));
         this.goalSelector.add(2, new WanderAroundGoal(this, 1F));
         this.goalSelector.add(3, new SitGoal(this));
-        this.goalSelector.add(4, new TemptGoal(this, 0.9F, Ingredient.ofItems(ItemRegistry.COLA), false));
+        // this.goalSelector.add(4, new TemptGoal(this, 0.9F, TAMING_INGREDIENTS, false));
         this.goalSelector.add(7, new FollowOwnerGoal(this, 1.25F, 5.0F, 6.0F, false));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1F));
         this.goalSelector.add(6, new LookAroundGoal(this));
@@ -71,9 +64,9 @@ public class BtwEntity extends TameableEntity {
         ItemStack itemStack = player.getStackInHand(hand);
 
         if (this.world.isClient) {
-            boolean bl = this.isOwner(player) || this.isTamed() || itemStack.isOf(ItemRegistry.COLA) && !this.isTamed();
+            boolean bl = this.isOwner(player) || this.isTamed() || TAMING_INGREDIENTS.test(itemStack) && !this.isTamed();
             return bl ? ActionResult.CONSUME : ActionResult.PASS;
-        }else{
+        } else {
             if (this.eat(player, itemStack)) {
                 if (!this.isTamed()) {
                     if (this.random.nextInt(2) == 0) {
@@ -83,14 +76,14 @@ public class BtwEntity extends TameableEntity {
                         this.navigation.stop();
                         this.setSitting(true);
                         this.jumping = false;
-                        this.world.sendEntityStatus(this, (byte)7);
-                    }else{
-                        this.world.sendEntityStatus(this, (byte)6);
+                        this.world.sendEntityStatus(this, (byte) 7);
+                    } else {
+                        this.world.sendEntityStatus(this, (byte) 6);
                     }
                 }
 
                 return ActionResult.SUCCESS;
-            }else{
+            } else {
                 ActionResult actionResult = super.interactMob(player, hand);
                 if (!actionResult.isAccepted() && this.isOwner(player)) {
                     this.setSitting(!this.isSitting());
@@ -100,16 +93,6 @@ public class BtwEntity extends TameableEntity {
                 }
             }
             return super.interactMob(player, hand);
-        }
-    }
-
-    private void spawnParticles() {
-        ParticleEffect particleEffect = ParticleTypes.HEART;
-        for(int i = 0; i < 7; ++i) {
-            double d = this.random.nextGaussian() * 0.02;
-            double e = this.random.nextGaussian() * 0.02;
-            double f = this.random.nextGaussian() * 0.02;
-            this.world.addParticle(particleEffect, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), d, e, f);
         }
     }
 
@@ -124,7 +107,7 @@ public class BtwEntity extends TameableEntity {
     }
 
     protected boolean eat(PlayerEntity player, ItemStack stack) {
-        if(stack.isOf(ItemRegistry.COLA) && this.onGround){
+        if(TAMING_INGREDIENTS.test(stack)  && this.onGround){
             if (!player.getAbilities().creativeMode) {
                 stack.decrement(1);
             }
@@ -143,11 +126,15 @@ public class BtwEntity extends TameableEntity {
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 0.7F;
     }
-
+//
     public static DefaultAttributeContainer.Builder createBtwAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5f);
+    }
+
+    public static entitySettings getSettings() {
+        return settings;
     }
 
     @Override
