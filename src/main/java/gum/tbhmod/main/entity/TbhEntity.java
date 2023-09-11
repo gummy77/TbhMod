@@ -55,7 +55,7 @@ public class TbhEntity extends TameableEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
         this.goalSelector.add(2, new SitGoal(this));
-        this.goalSelector.add(3, new TemptGoal(this, 1.1, Ingredient.ofItems(ItemRegistry.COLA), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.1, TAMING_INGREDIENTS, false));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(5, new LookAtEntityGoal(this, TbhEntity.class, 6.0F));
         this.goalSelector.add(6, new FollowOwnerGoal(this, 1.3, 2.0F, 2.0F, false));
@@ -70,7 +70,7 @@ public class TbhEntity extends TameableEntity {
         if (this.world.isClient) {
             boolean bl = this.isOwner(player) || this.isTamed() || TAMING_INGREDIENTS.test(itemStack) && !this.isTamed();
             return bl ? ActionResult.CONSUME : ActionResult.PASS;
-        }else{
+        } else {
             if (this.eat(player, itemStack)) {
                 if (!this.isTamed()) {
                     if (this.random.nextInt(2) == 0) {
@@ -80,14 +80,14 @@ public class TbhEntity extends TameableEntity {
                         this.navigation.stop();
                         this.setSitting(true);
                         this.jumping = false;
-                        this.world.sendEntityStatus(this, (byte)7);
-                    }else{
-                        this.world.sendEntityStatus(this, (byte)6);
+                        this.world.sendEntityStatus(this, (byte) 7);
+                    } else {
+                        this.world.sendEntityStatus(this, (byte) 6);
                     }
                 }
 
                 return ActionResult.success(this.world.isClient);
-            }else{
+            } else {
                 ActionResult actionResult = super.interactMob(player, hand);
                 if (!actionResult.isAccepted() && this.isOwner(player)) {
                     this.setSitting(!this.isSitting());
@@ -104,15 +104,17 @@ public class TbhEntity extends TameableEntity {
     protected SoundEvent getAmbientSound() {
         return SoundRegistry.TBH_AMBIENT;
     }
+
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundRegistry.TBH_HURT;
     }
+
     protected SoundEvent getDeathSound() {
         return SoundRegistry.TBH_DIES;
     }
 
     protected boolean eat(PlayerEntity player, ItemStack stack) {
-        if(TAMING_INGREDIENTS.test(stack) && this.onGround){
+        if (TAMING_INGREDIENTS.test(stack) && this.onGround) {
             if (!player.getAbilities().creativeMode) {
                 stack.decrement(1);
             }
@@ -122,10 +124,10 @@ public class TbhEntity extends TameableEntity {
 
             if (this.random.nextInt(3) == 0) {
                 world.playSound(null, this.getBlockPos(), SoundRegistry.COLA, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
-            }else{
+            } else {
                 world.playSound(null, this.getBlockPos(), SoundRegistry.YIPPEE, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
             }
-            world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f+(random.nextFloat()*0.1f));
+            world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f + (random.nextFloat() * 0.1f));
             return true;
         }
         return false;
@@ -142,7 +144,7 @@ public class TbhEntity extends TameableEntity {
     }
 
     @Override
-    public float getPathfindingFavor (BlockPos pos, WorldView world) {
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
         return 10;
     }
 

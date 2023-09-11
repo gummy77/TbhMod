@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ItemRegistry {
 
-    public static final Item
+    public static Item
             COLA, CAN, ENERGY_DRINK,
             TBH_CREATURE_SPAWN_EGG, TBH_MEAT,
             BTW_CREATURE_SPAWN_EGG, BTW_MEAT;
@@ -23,14 +23,15 @@ public class ItemRegistry {
         CAN = register("can", new Can());
         ENERGY_DRINK = register("energy_drink", new EnergyDrink());
 
-        TBH_CREATURE_SPAWN_EGG = register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, new FabricItemSettings()));
-        BTW_CREATURE_SPAWN_EGG = register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, new FabricItemSettings()));
 
         TBH_MEAT = register("tbh_meat", new TbhMeat());
         BTW_MEAT = register("btw_meat", new BtwMeat());
     }
 
-    public static void registerItems() {}
+    public static void registerItems() {
+        TBH_CREATURE_SPAWN_EGG = register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, new FabricItemSettings()));
+        BTW_CREATURE_SPAWN_EGG = register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, new FabricItemSettings()));
+    }
 
     public static final ItemGroup MODGROUP = FabricItemGroupBuilder.create(
                     new Identifier(TbhMod.MODID, "tbhmodgroup"))

@@ -52,7 +52,7 @@ public class BtwEntity extends TameableEntity {
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25F));
         this.goalSelector.add(2, new WanderAroundGoal(this, 1F));
         this.goalSelector.add(3, new SitGoal(this));
-        // this.goalSelector.add(4, new TemptGoal(this, 0.9F, TAMING_INGREDIENTS, false));
+        this.goalSelector.add(4, new TemptGoal(this, 0.9F, TAMING_INGREDIENTS, false));
         this.goalSelector.add(7, new FollowOwnerGoal(this, 1.25F, 5.0F, 6.0F, false));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1F));
         this.goalSelector.add(6, new LookAroundGoal(this));
@@ -99,15 +99,17 @@ public class BtwEntity extends TameableEntity {
     protected SoundEvent getAmbientSound() {
         return SoundRegistry.BTW_AMBIENT;
     }
+
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundRegistry.BTW_HURT;
     }
+
     protected SoundEvent getDeathSound() {
         return SoundRegistry.BTW_DIES;
     }
 
     protected boolean eat(PlayerEntity player, ItemStack stack) {
-        if(TAMING_INGREDIENTS.test(stack)  && this.onGround){
+        if (TAMING_INGREDIENTS.test(stack) && this.onGround) {
             if (!player.getAbilities().creativeMode) {
                 stack.decrement(1);
             }
@@ -117,7 +119,7 @@ public class BtwEntity extends TameableEntity {
 
             world.playSound(null, this.getBlockPos(), SoundRegistry.YAHOO, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
 
-            world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f+(random.nextFloat()*0.1f));
+            world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f + (random.nextFloat() * 0.1f));
             return true;
         }
         return false;
@@ -126,7 +128,8 @@ public class BtwEntity extends TameableEntity {
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return 0.7F;
     }
-//
+
+    //
     public static DefaultAttributeContainer.Builder createBtwAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
@@ -138,7 +141,7 @@ public class BtwEntity extends TameableEntity {
     }
 
     @Override
-    public float getPathfindingFavor (BlockPos pos, WorldView world) {
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
         return 10;
     }
 

@@ -1,4 +1,5 @@
 package gum.tbhmod.main.entity;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.tag.TagKey;
@@ -17,7 +18,7 @@ public class entitySettings {
     public int maxGroupSize;
     public boolean spawnsNaturally = false;
 
-    public entitySettings (String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y, int spawnWeight, int minGroupSize, int maxGroupSize){
+    public entitySettings(String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y, int spawnWeight, int minGroupSize, int maxGroupSize) {
         this.path = path;
         this.entityFactory = entityFactory;
         this.spawnGroup = spawnGroup;
@@ -30,7 +31,7 @@ public class entitySettings {
         this.spawnsNaturally = true;
     }
 
-    public entitySettings (String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y){
+    public entitySettings(String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y) {
         this.path = path;
         this.entityFactory = entityFactory;
         this.spawnGroup = spawnGroup;
