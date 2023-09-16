@@ -2,54 +2,55 @@ package gum.tbhmod.main.init;
 
 import gum.tbhmod.main.TbhMod;
 import gum.tbhmod.main.item.*;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.*;
+
 public class ItemRegistry {
 
-    public static Item
-            COLA, CAN, ENERGY_DRINK,
-            TBH_CREATURE_SPAWN_EGG, TBH_MEAT,
-            BTW_CREATURE_SPAWN_EGG, BTW_MEAT;
+    private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
+    public static final Cola COLA;
+    public static final Item CAN;
+    public static final EnergyDrink ENERGY_DRINK;
+    public static final TbhMeat TBH_MEAT;
+    public static final TbhMeat BTW_MEAT;
+    public static final SpawnEggItem TBH_CREATURE_SPAWN_EGG;
+    public static final SpawnEggItem BTW_CREATURE_SPAWN_EGG;
 
-    static {
-        COLA = register("cola", new Cola());
-        CAN = register("can", new Can());
-        ENERGY_DRINK = register("energy_drink", new EnergyDrink());
 
-
-        TBH_MEAT = register("tbh_meat", new TbhMeat());
-        BTW_MEAT = register("btw_meat", new BtwMeat());
-    }
 
     public static void registerItems() {
-        TBH_CREATURE_SPAWN_EGG = register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, new FabricItemSettings()));
-        BTW_CREATURE_SPAWN_EGG = register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, new FabricItemSettings()));
+
+        Iterator<Map.Entry<Identifier, Item>> var0 = ITEMS.entrySet().iterator();
+        Map.Entry entry;
+
+        while(var0.hasNext()) {
+            entry = var0.next();
+            Registry.register(Registry.ITEM, (Identifier) entry.getKey(), (Item) entry.getValue());
+        }
     }
 
-    public static final ItemGroup MODGROUP = FabricItemGroupBuilder.create(
-                    new Identifier(TbhMod.MODID, "tbhmodgroup"))
-            .icon(() -> new ItemStack(COLA))
-            .appendItems(stacks -> {
-                //Items
-                stacks.add(new ItemStack(COLA));
-                stacks.add(new ItemStack(CAN));
-                stacks.add(new ItemStack(ENERGY_DRINK));
-                stacks.add(new ItemStack(TBH_MEAT));
-                stacks.add(new ItemStack(BTW_MEAT));
-                stacks.add(new ItemStack(TBH_CREATURE_SPAWN_EGG));
-                stacks.add(new ItemStack(BTW_CREATURE_SPAWN_EGG));
-
-            })
-            .build();
-
     public static Item register (String path, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(TbhMod.MODID, path), item);
+        return ITEMS.put(new Identifier(TbhMod.MODID, path), item);
+    }
+
+    public static Item.Settings getSettings(){
+        return new FabricItemSettings().group(TbhMod.MODGROUP);
+    }
+
+    static {
+        COLA = (Cola) register("cola", new Cola(getSettings()));
+        CAN = register("can", new Item(getSettings().maxCount(16)));
+        ENERGY_DRINK = (EnergyDrink) register("energy_drink", new EnergyDrink(getSettings()));
+
+        TBH_MEAT = (TbhMeat) register("tbh_meat", new TbhMeat(getSettings(), EffectRegistry.AUTISM));
+        BTW_MEAT = (TbhMeat) register("btw_meat", new TbhMeat(getSettings(), EffectRegistry.ADHD));
+
+        TBH_CREATURE_SPAWN_EGG = (SpawnEggItem) register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, getSettings()));
+        BTW_CREATURE_SPAWN_EGG = (SpawnEggItem) register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, getSettings()));
     }
 }

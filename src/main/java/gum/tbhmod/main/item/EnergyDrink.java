@@ -1,15 +1,14 @@
 package gum.tbhmod.main.item;
 
 import gum.tbhmod.main.init.ItemRegistry;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -18,9 +17,9 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class EnergyDrink extends ModItem{
-    public EnergyDrink() {
-        super(new FabricItemSettings().maxCount(1));
+public class EnergyDrink extends Item {
+    public EnergyDrink(Settings _settings) {
+        super(_settings.maxCount(1));
     }
 
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {

@@ -18,6 +18,7 @@ public class EntityRegistry {
     public static final EntityType TBH_ENTITY = registerEntity(TbhEntity.getSettings());
     public static final EntityType BTW_ENTITY = registerEntity(BtwEntity.getSettings());
 
+
     public static void registerEntityAttributes() {
         FabricDefaultAttributeRegistry.register(TBH_ENTITY, TbhEntity.createTbhAttributes());
         FabricDefaultAttributeRegistry.register(BTW_ENTITY, BtwEntity.createBtwAttributes());

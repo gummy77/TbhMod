@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class BtwEntity extends TameableEntity {
-    private static final Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA, ItemRegistry.ENERGY_DRINK);
+    private static Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA, ItemRegistry.ENERGY_DRINK);
     private static final entitySettings settings = new entitySettings(
             "btw_creature",
             BtwEntity::new,

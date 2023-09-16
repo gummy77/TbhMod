@@ -16,6 +16,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public class TbhEntity extends TameableEntity {
-    private static final Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA);
+    private static Ingredient TAMING_INGREDIENTS = Ingredient.ofItems(ItemRegistry.COLA, Items.SAND);
     private static final entitySettings settings = new entitySettings(
             "tbh_creature",
             TbhEntity::new,
