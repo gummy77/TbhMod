@@ -8,7 +8,6 @@ import net.minecraft.world.biome.Biome;
 public class entitySettings {
 
     public String path;
-    public EntityType.EntityFactory entityFactory;
     public SpawnGroup spawnGroup;
     public TagKey<Biome> selectorTag;
     public float x;
@@ -18,9 +17,8 @@ public class entitySettings {
     public int maxGroupSize;
     public boolean spawnsNaturally = false;
 
-    public entitySettings(String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y, int spawnWeight, int minGroupSize, int maxGroupSize) {
+    public entitySettings(String path, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y, int spawnWeight, int minGroupSize, int maxGroupSize) {
         this.path = path;
-        this.entityFactory = entityFactory;
         this.spawnGroup = spawnGroup;
         this.selectorTag = selectorTag;
         this.x = x;
@@ -31,9 +29,8 @@ public class entitySettings {
         this.spawnsNaturally = true;
     }
 
-    public entitySettings(String path, EntityType.EntityFactory entityFactory, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y) {
+    public entitySettings(String path, SpawnGroup spawnGroup, TagKey<Biome> selectorTag, float x, float y) {
         this.path = path;
-        this.entityFactory = entityFactory;
         this.spawnGroup = spawnGroup;
         this.selectorTag = selectorTag;
         this.x = x;

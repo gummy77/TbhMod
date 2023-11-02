@@ -1,6 +1,5 @@
 package gum.tbhmod.main;
 
-import gum.tbhmod.main.item.Cola;
 import net.fabricmc.api.ModInitializer;
 import gum.tbhmod.main.init.*;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -18,9 +17,9 @@ public class TbhMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ItemRegistry.registerItems();
+        EntityRegistry.registerEntities();
         EntityRegistry.registerEntityAttributes();
-
+        ItemRegistry.registerItems();
 
         EffectRegistry.registerEffects();
         SoundRegistry.registerSounds();

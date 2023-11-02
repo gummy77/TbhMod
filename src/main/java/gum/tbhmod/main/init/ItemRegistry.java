@@ -13,29 +13,27 @@ import java.util.*;
 public class ItemRegistry {
 
     private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
-    public static final Cola COLA;
     public static final Item CAN;
     public static final EnergyDrink ENERGY_DRINK;
+    public static final Cola COLA;
     public static final TbhMeat TBH_MEAT;
     public static final TbhMeat BTW_MEAT;
-    public static final SpawnEggItem TBH_CREATURE_SPAWN_EGG;
-    public static final SpawnEggItem BTW_CREATURE_SPAWN_EGG;
+    public static SpawnEggItem TBH_CREATURE_SPAWN_EGG;
+    public static SpawnEggItem BTW_CREATURE_SPAWN_EGG;
 
 
 
     public static void registerItems() {
+        TBH_CREATURE_SPAWN_EGG = (SpawnEggItem) register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, getSettings()));
+        BTW_CREATURE_SPAWN_EGG = (SpawnEggItem) register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, getSettings()));
+    }
 
-        Iterator<Map.Entry<Identifier, Item>> var0 = ITEMS.entrySet().iterator();
-        Map.Entry entry;
-
-        while(var0.hasNext()) {
-            entry = var0.next();
-            Registry.register(Registry.ITEM, (Identifier) entry.getKey(), (Item) entry.getValue());
-        }
+    public static Item registerEgg (String path, Item item) {
+        return ITEMS.put(new Identifier(TbhMod.MODID, path), item);
     }
 
     public static Item register (String path, Item item) {
-        return ITEMS.put(new Identifier(TbhMod.MODID, path), item);
+        return Registry.register(Registry.ITEM, new Identifier(TbhMod.MODID, path), item);
     }
 
     public static Item.Settings getSettings(){
@@ -49,8 +47,5 @@ public class ItemRegistry {
 
         TBH_MEAT = (TbhMeat) register("tbh_meat", new TbhMeat(getSettings(), EffectRegistry.AUTISM));
         BTW_MEAT = (TbhMeat) register("btw_meat", new TbhMeat(getSettings(), EffectRegistry.ADHD));
-
-        TBH_CREATURE_SPAWN_EGG = (SpawnEggItem) register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, getSettings()));
-        BTW_CREATURE_SPAWN_EGG = (SpawnEggItem) register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, getSettings()));
     }
 }
