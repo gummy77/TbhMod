@@ -1,6 +1,6 @@
 package gum.tbhmod.main.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import gum.tbhmod.main.init.ItemRegistry;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -42,11 +41,11 @@ public class Cola extends Item {
 
         if (playerEntity == null || !playerEntity.getAbilities().creativeMode) {
             if (stack.isEmpty()) {
-                return new ItemStack(Items.GLASS_BOTTLE);
+                return new ItemStack(ItemRegistry.CAN);
             }
 
             if (playerEntity != null) {
-                playerEntity.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+                playerEntity.getInventory().insertStack(new ItemStack(ItemRegistry.CAN));
             }
         }
 

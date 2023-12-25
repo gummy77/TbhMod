@@ -8,16 +8,13 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.*;
-
 public class ItemRegistry {
 
-    private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
     public static final Item CAN;
     public static final EnergyDrink ENERGY_DRINK;
-    public static final Cola COLA;
-    public static final TbhMeat TBH_MEAT;
-    public static final TbhMeat BTW_MEAT;
+    public static final Cola COLA, COLA_BOTTLE;
+    public static final CreatureMeat TBH_MEAT;
+    public static final CreatureMeat BTW_MEAT;
     public static SpawnEggItem TBH_CREATURE_SPAWN_EGG;
     public static SpawnEggItem BTW_CREATURE_SPAWN_EGG;
 
@@ -26,10 +23,6 @@ public class ItemRegistry {
     public static void registerItems() {
         TBH_CREATURE_SPAWN_EGG = (SpawnEggItem) register("tbh_creature_spawn_egg", new SpawnEggItem(EntityRegistry.TBH_ENTITY, 0xffffff , 0x401d15, getSettings()));
         BTW_CREATURE_SPAWN_EGG = (SpawnEggItem) register("btw_creature_spawn_egg", new SpawnEggItem(EntityRegistry.BTW_ENTITY, 0xffffff , 0xB18AB7, getSettings()));
-    }
-
-    public static Item registerEgg (String path, Item item) {
-        return ITEMS.put(new Identifier(TbhMod.MODID, path), item);
     }
 
     public static Item register (String path, Item item) {
@@ -41,11 +34,12 @@ public class ItemRegistry {
     }
 
     static {
-        COLA = (Cola) register("cola", new Cola(getSettings()));
         CAN = register("can", new Item(getSettings().maxCount(16)));
         ENERGY_DRINK = (EnergyDrink) register("energy_drink", new EnergyDrink(getSettings()));
+        COLA = (Cola) register("cola", new Cola(getSettings()));
+        COLA_BOTTLE = (Cola) register("cola_bottle", new Cola(getSettings()));
 
-        TBH_MEAT = (TbhMeat) register("tbh_meat", new TbhMeat(getSettings(), EffectRegistry.AUTISM));
-        BTW_MEAT = (TbhMeat) register("btw_meat", new TbhMeat(getSettings(), EffectRegistry.ADHD));
+        TBH_MEAT = (CreatureMeat) register("tbh_meat", new CreatureMeat(getSettings(), EffectRegistry.AUTISM));
+        BTW_MEAT = (CreatureMeat) register("btw_meat", new CreatureMeat(getSettings(), EffectRegistry.ADHD));
     }
 }

@@ -29,7 +29,7 @@
               "type_specific": {
                 "type": "player",
                 "looking_at": {
-                  "type": "tbhmod:tbh_creature"
+                  "type": "tbhmod:tbh_entity"
                 }
               }
             }

@@ -1,6 +1,5 @@
 package gum.tbhmod.main.entity;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.tag.TagKey;
 import net.minecraft.world.biome.Biome;

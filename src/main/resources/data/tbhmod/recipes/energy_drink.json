@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SCS",
+    "SBS",
     "SCS",
     "SSS"
   ],
@@ -12,12 +12,12 @@
     "S": {
       "item": "minecraft:sugar"
     },
-    "C": {
+    "B": {
       "item": "minecraft:cocoa_beans"
     }
   },
   "result": {
-    "item": "tbhmod:cola",
+    "item": "tbhmod:energy_drink",
     "count": 1
   }
 }

@@ -14,7 +14,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -38,7 +37,7 @@ public class BtwEntity extends TameableEntity {
             SpawnGroup.CREATURE,
             BiomeTags.IS_FOREST,
             0.8f, 0.8f,
-            5, 3, 8
+            3, 3, 8
     );
 
     public BtwEntity(EntityType<? extends TameableEntity> entityType, World world) {

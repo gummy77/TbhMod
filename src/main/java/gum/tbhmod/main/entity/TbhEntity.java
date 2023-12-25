@@ -11,13 +11,10 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -37,7 +34,6 @@ import java.util.Objects;
 
 public class TbhEntity extends TameableEntity {
     private static final Ingredient TAMING_INGREDIENT;
-    private net.minecraft.entity.ai.goal.TemptGoal temptGoal;
     private static final entitySettings settings = new entitySettings(
             "tbh_creature",
             SpawnGroup.CREATURE,
@@ -56,11 +52,11 @@ public class TbhEntity extends TameableEntity {
     }
 
     protected void initGoals() {
-        this.temptGoal = new TemptGoal(this, 1.1, TAMING_INGREDIENT, false);
+        TemptGoal temptGoal = new TemptGoal(this, 1.1, TAMING_INGREDIENT, false);
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
         this.goalSelector.add(2, new SitGoal(this));
-        this.goalSelector.add(3, this.temptGoal);
+        this.goalSelector.add(3, temptGoal);
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(5, new LookAtEntityGoal(this, TbhEntity.class, 6.0F));
         this.goalSelector.add(6, new FollowOwnerGoal(this, 1.3, 2.0F, 2.0F, false));
@@ -132,7 +128,11 @@ public class TbhEntity extends TameableEntity {
             } else {
                 world.playSound(null, this.getBlockPos(), SoundRegistry.YIPPEE, SoundCategory.NEUTRAL, 1f, 0.9f + (random.nextFloat() * 0.2f));
             }
-            world.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.NEUTRAL, 1f, 0.95f + (random.nextFloat() * 0.1f));
+            if(stack.isOf(Items.SAND)){
+                world.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_SAND_BREAK, SoundCategory.NEUTRAL, 1f, 0.95f + (random.nextFloat() * 0.1f));
+            } else {
+                world.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.NEUTRAL, 1f, 0.95f + (random.nextFloat() * 0.1f));
+            }
             return true;
         }
         return false;
@@ -164,6 +164,6 @@ public class TbhEntity extends TameableEntity {
     }
 
     static {
-        TAMING_INGREDIENT = Ingredient.ofItems(ItemRegistry.COLA);
+        TAMING_INGREDIENT = Ingredient.ofItems(ItemRegistry.COLA, ItemRegistry.COLA_BOTTLE, Items.SAND);
     }
 }

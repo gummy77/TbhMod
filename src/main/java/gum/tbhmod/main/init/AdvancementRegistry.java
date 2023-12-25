@@ -2,10 +2,7 @@ package gum.tbhmod.main.init;
 
 import gum.tbhmod.main.advancements.TamedBtwAdvancement;
 import gum.tbhmod.main.advancements.TamedTbhAdvancement;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.util.registry.Registry;
 
 
 public class AdvancementRegistry {

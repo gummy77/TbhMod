@@ -10,14 +10,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class EntityRegistry {
 
@@ -57,9 +51,4 @@ public class EntityRegistry {
         }
         return entityType;
     }
-
-//    static {
-//        TBH_ENTITY = registerEntity("tbh_entity", TbhEntity::new, TbhEntity.getSettings());
-//        BTW_ENTITY = registerEntity("btw_entity", BtwEntity::new, BtwEntity.getSettings());
-//    }
 }

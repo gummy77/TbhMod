@@ -12,7 +12,7 @@ public class TbhMod implements ModInitializer {
 
     public static final ItemGroup MODGROUP = FabricItemGroupBuilder.create(
             new Identifier(TbhMod.MODID, "tbhmodgroup"))
-            .icon(() -> new ItemStack(ItemRegistry.COLA))
+            .icon(() -> new ItemStack(ItemRegistry.COLA_BOTTLE))
             .build();
 
     @Override
