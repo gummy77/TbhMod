@@ -11,7 +11,9 @@ adds a tameable tbh creature to minecraft
 ## Features
 ### v2.0.0
 - Added the Btw Creature
-- Added 
+- Added Energy Drink
+- Updated Crafting
+
 ### v1.0.0
 - Added the Tbh Creature
 - Added Cola
